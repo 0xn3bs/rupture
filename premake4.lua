@@ -6,16 +6,17 @@ solution "Rupture"
 	
 	targetdir "bin"
 	
-	local EditorName = "RuptureEditor"
-	local DLLName = "RuptureDLL" 	
 	vpaths { ["Headers"] = "**.h" }
 	vpaths { ["Headers"] = "**.hpp" }
 	vpaths { ["Source"] = "**.cpp" }
-	
-	local DXSDK = os.getenv("DXSDK_DIR")
-	local DXSDK_INCLUDE = DXSDK .. "/Include"
-	local DXSDK_LIB = DXSDK .. "/Lib"
-	
+
+local EditorName = "RuptureEditor"
+local DLLName = "RuptureDLL" 
+
+local DXSDK = os.getenv("DXSDK_DIR")
+local DXSDK_INCLUDE = DXSDK .. "/Include"
+local DXSDK_LIB = DXSDK .. "/Lib"
+
 project (EditorName)
 	uuid "c8dab8ca-60c3-47ae-84a4-83eef4a6728f"
 	kind "WindowedApp"
