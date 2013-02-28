@@ -1,5 +1,5 @@
-#ifndef __VECTOR2_H__
-#define __VECTOR2_H__
+#ifndef REN_VECTOR2_H__
+#define REN_VECTOR2_H__
 
 #include <math.h>
 #include <ostream>
@@ -128,4 +128,4 @@ public:
 	}
 };
 
-#endif  /*VECTOR_H_*/
+#endif  /*REN_VECTOR2_H__*/
