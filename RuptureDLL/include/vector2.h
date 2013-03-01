@@ -5,7 +5,9 @@
 #include <ostream>
 #include <cassert>
 
-class _declspec(dllexport) Vec2
+#include "Export.h"
+
+class REN_DLL_EXPORT Vec2
 {
 public:
 	double x, y;

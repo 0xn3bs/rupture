@@ -35,7 +35,8 @@ project (EditorName)
 		targetname ( project().name .. "_d" )
 		links { DLLName .. "_d" }
 		flags { "Symbols" }
-
+		defines { "_DEBUG" }
+		
 		configuration { "Native" }
 			libdirs { DXSDK_LIB .. "/x86" }
 			
@@ -50,7 +51,8 @@ project (EditorName)
 		targetname ( project().name )
 		links { DLLName }
 		flags { "Optimize" }
-
+		defines { "_RELEASE" }
+		
 		configuration { "Native" }
 			libdirs { DXSDK_LIB .. "/x86" }
 			
@@ -65,6 +67,8 @@ project (DLLName)
 	kind "SharedLib"
 	language "C++"
 	location "build"
+	defines { "_RUPTURE_DLL" }
+	
 	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
 	
 	includedirs( project().name .. "/include" )
@@ -77,6 +81,7 @@ project (DLLName)
 		debugdir "bin"
 		targetname ( project().name .. "_d" )
 		flags { "Symbols" }
+		defines { "_DEBUG" }
 		links { "d3d11", "d3dx11", "d3dx10" }
 		
 		configuration { "Native" }
@@ -92,6 +97,7 @@ project (DLLName)
 		debugdir "bin"
 		targetname ( project().name )
 		flags { "Optimize" }
+		defines { "_RELEASE" }
 		links { "d3d11", "d3dx11", "d3dx10" }
 		
 		configuration { "Native" }
