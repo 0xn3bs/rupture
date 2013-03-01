@@ -5,10 +5,6 @@ solution "Rupture"
 	platforms { "Native", "x32", "x64" }
 	
 	targetdir "bin"
-	
-	vpaths { ["Headers"] = "**.h" }
-	vpaths { ["Headers"] = "**.hpp" }
-	vpaths { ["Source"] = "**.cpp" }
 
 local EditorName = "RuptureEditor"
 local DLLName = "RuptureDLL" 
@@ -23,16 +19,33 @@ project (EditorName)
 	flags { "WinMain" }
 	language "C++"
 	location "build"
-	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
+	
+	local PROJ_NAME = project.name()
+	
+	files { PROJ_NAME .. "/include/**.h", PROJ_NAME .. "/include/**.hpp", PROJ_NAME .. "/src/**.cpp" }
 	
 	includedirs( DLLName .. "/include" )
 	includedirs( DXSDK_INCLUDE )
 	
 	libdirs { DLLName .. "/lib" }
 	
+	vpaths	
+	{ 
+		["Headers/*"] =	
+		{ 
+			PROJ_NAME .. "/include/**.h", 
+			PROJ_NAME .. "/include/**.hpp" 
+		},
+		["Source/*"] =	
+		{ 
+			PROJ_NAME .. "/src/**.c", 
+			PROJ_NAME .. "/src/**.cpp" 
+		} 
+	}
+	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( project().name .. "_d" )
+		targetname ( PROJ_NAME .. "_d" )
 		links { DLLName .. "_d" }
 		flags { "Symbols" }
 		defines { "_DEBUG" }
@@ -48,7 +61,7 @@ project (EditorName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( project().name )
+		targetname ( PROJ_NAME )
 		links { DLLName }
 		flags { "Optimize" }
 		defines { "_RELEASE" }
@@ -69,17 +82,33 @@ project (DLLName)
 	location "build"
 	defines { "_RUPTURE_DLL" }
 	
-	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
+	local PROJ_NAME = project.name()
 	
-	includedirs( project().name .. "/include" )
+	files { PROJ_NAME .. "/include/**.h", PROJ_NAME .. "/include/**.hpp", PROJ_NAME .. "/src/**.cpp" }
+	
+	includedirs( PROJ_NAME .. "/include" )
 	includedirs( DXSDK_INCLUDE )
 	
-	implibdir ( project().name .. "/lib" )
+	implibdir ( PROJ_NAME .. "/lib" )
 	libdirs { DXSDK_LIB }
+	
+	vpaths	
+	{ 
+		["Headers/*"] =	
+		{ 
+			PROJ_NAME .. "/include/**.h", 
+			PROJ_NAME .. "/include/**.hpp" 
+		},
+		["Source/*"] =	
+		{ 
+			PROJ_NAME .. "/src/**.c", 
+			PROJ_NAME .. "/src/**.cpp" 
+		} 
+	}
 	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( project().name .. "_d" )
+		targetname ( PROJ_NAME .. "_d" )
 		flags { "Symbols" }
 		defines { "_DEBUG" }
 		links { "d3d11", "d3dx11", "d3dx10" }
@@ -95,7 +124,7 @@ project (DLLName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( project().name )
+		targetname ( PROJ_NAME )
 		flags { "Optimize" }
 		defines { "_RELEASE" }
 		links { "d3d11", "d3dx11", "d3dx10" }
