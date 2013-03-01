@@ -6,7 +6,7 @@
 #include <windows.h>
 
 // Include stuff here
-#include "vector2.h"
+#include "Math/Vector2.h"
 
 BOOL APIENTRY DllMain( HMODULE hModule,
                        DWORD  ul_reason_for_call,
