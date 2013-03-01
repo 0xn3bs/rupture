@@ -20,9 +20,7 @@ project (EditorName)
 	language "C++"
 	location "build"
 	
-	local PROJ_NAME = project.name()
-	
-	files { PROJ_NAME .. "/include/**.h", PROJ_NAME .. "/include/**.hpp", PROJ_NAME .. "/src/**.cpp" }
+	files { EditorName .. "/include/**.h", EditorName .. "/include/**.hpp", EditorName .. "/src/**.cpp" }
 	
 	includedirs( DLLName .. "/include" )
 	includedirs( DXSDK_INCLUDE )
@@ -33,19 +31,19 @@ project (EditorName)
 	{ 
 		["Headers/*"] =	
 		{ 
-			PROJ_NAME .. "/include/**.h", 
-			PROJ_NAME .. "/include/**.hpp" 
+			EditorName .. "/include/**.h", 
+			EditorName .. "/include/**.hpp" 
 		},
 		["Source/*"] =	
 		{ 
-			PROJ_NAME .. "/src/**.c", 
-			PROJ_NAME .. "/src/**.cpp" 
+			EditorName .. "/src/**.c", 
+			EditorName .. "/src/**.cpp" 
 		} 
 	}
 	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( PROJ_NAME .. "_d" )
+		targetname ( EditorName .. "_d" )
 		links { DLLName .. "_d" }
 		flags { "Symbols" }
 		defines { "_DEBUG" }
@@ -61,7 +59,7 @@ project (EditorName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( PROJ_NAME )
+		targetname ( EditorName )
 		links { DLLName }
 		flags { "Optimize" }
 		defines { "_RELEASE" }
@@ -81,34 +79,32 @@ project (DLLName)
 	language "C++"
 	location "build"
 	defines { "_RUPTURE_DLL" }
+
+	files { DLLName .. "/include/**.h", DLLName .. "/include/**.hpp", DLLName .. "/src/**.cpp" }
 	
-	local PROJ_NAME = project.name()
-	
-	files { PROJ_NAME .. "/include/**.h", PROJ_NAME .. "/include/**.hpp", PROJ_NAME .. "/src/**.cpp" }
-	
-	includedirs( PROJ_NAME .. "/include" )
+	includedirs( DLLName .. "/include" )
 	includedirs( DXSDK_INCLUDE )
 	
-	implibdir ( PROJ_NAME .. "/lib" )
+	implibdir ( DLLName .. "/lib" )
 	libdirs { DXSDK_LIB }
 	
 	vpaths	
 	{ 
 		["Headers/*"] =	
 		{ 
-			PROJ_NAME .. "/include/**.h", 
-			PROJ_NAME .. "/include/**.hpp" 
+			DLLName .. "/include/**.h", 
+			DLLName .. "/include/**.hpp" 
 		},
 		["Source/*"] =	
 		{ 
-			PROJ_NAME .. "/src/**.c", 
-			PROJ_NAME .. "/src/**.cpp" 
+			DLLName .. "/src/**.c", 
+			DLLName .. "/src/**.cpp" 
 		} 
 	}
 	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( PROJ_NAME .. "_d" )
+		targetname ( DLLName .. "_d" )
 		flags { "Symbols" }
 		defines { "_DEBUG" }
 		links { "d3d11", "d3dx11", "d3dx10" }
@@ -124,7 +120,7 @@ project (DLLName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( PROJ_NAME )
+		targetname ( DLLName )
 		flags { "Optimize" }
 		defines { "_RELEASE" }
 		links { "d3d11", "d3dx11", "d3dx10" }
