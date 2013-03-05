@@ -5,6 +5,8 @@ solution "Rupture"
 	platforms { "Native", "x32", "x64" }
 	
 	targetdir "bin"
+	
+local EXTLIBS = "extlibs"
 
 local BuilderName = "RuptureBuilder"
 local EditorName = "RuptureEditor"
@@ -17,11 +19,15 @@ local DXSDK_LIB = DXSDK .. "/Lib"
 project (BuilderName)
 	uuid "ba88416e-0b2b-438e-8983-5b4524e131ac"
 	kind "WindowedApp"
-	flags { "WinMain" }
 	language "C++"
 	location "build"
 	
-	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
+	files 
+	{
+		project().name .. "/include/**.h", 
+		project().name .. "/include/**.hpp", 
+		project().name .. "/src/**.cpp",
+	}
 	
 	includedirs( DLLName .. "/include" )
 	includedirs( DXSDK_INCLUDE )
