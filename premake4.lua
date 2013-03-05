@@ -6,6 +6,7 @@ solution "Rupture"
 	
 	targetdir "bin"
 
+local BuilderName = "RuptureBuilder"
 local EditorName = "RuptureEditor"
 local DLLName = "RuptureDLL" 
 
@@ -13,14 +14,14 @@ local DXSDK = os.getenv("DXSDK_DIR")
 local DXSDK_INCLUDE = DXSDK .. "/Include"
 local DXSDK_LIB = DXSDK .. "/Lib"
 
-project (EditorName)
-	uuid "c8dab8ca-60c3-47ae-84a4-83eef4a6728f"
+project (BuilderName)
+	uuid "ba88416e-0b2b-438e-8983-5b4524e131ac"
 	kind "WindowedApp"
 	flags { "WinMain" }
 	language "C++"
 	location "build"
 	
-	files { EditorName .. "/include/**.h", EditorName .. "/include/**.hpp", EditorName .. "/src/**.cpp" }
+	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
 	
 	includedirs( DLLName .. "/include" )
 	includedirs( DXSDK_INCLUDE )
@@ -31,19 +32,19 @@ project (EditorName)
 	{ 
 		["Headers/*"] =	
 		{ 
-			EditorName .. "/include/**.h", 
-			EditorName .. "/include/**.hpp" 
+			project().name .. "/include/**.h", 
+			project().name .. "/include/**.hpp" 
 		},
 		["Source/*"] =	
 		{ 
-			EditorName .. "/src/**.c", 
-			EditorName .. "/src/**.cpp" 
+			project().name .. "/src/**.c", 
+			project().name .. "/src/**.cpp" 
 		} 
 	}
 	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( EditorName .. "_d" )
+		targetname ( project().name .. "_d" )
 		links { DLLName .. "_d" }
 		flags { "Symbols" }
 		defines { "_DEBUG" }
@@ -59,7 +60,67 @@ project (EditorName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( EditorName )
+		targetname ( project().name )
+		links { DLLName }
+		flags { "Optimize" }
+		defines { "_RELEASE" }
+		
+		configuration { "Native" }
+			libdirs { DXSDK_LIB .. "/x86" }
+			
+		configuration { "x32" }
+			libdirs { DXSDK_LIB .. "/x86" }
+			
+		configuration { "x64" }
+			libdirs { DXSDK_LIB .. "/x64" }
+	
+project (EditorName)
+	uuid "c8dab8ca-60c3-47ae-84a4-83eef4a6728f"
+	kind "WindowedApp"
+	flags { "WinMain" }
+	language "C++"
+	location "build"
+	
+	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
+	
+	includedirs( DLLName .. "/include" )
+	includedirs( DXSDK_INCLUDE )
+	
+	libdirs { DLLName .. "/lib" }
+	
+	vpaths	
+	{ 
+		["Headers/*"] =	
+		{ 
+			project().name .. "/include/**.h", 
+			project().name .. "/include/**.hpp" 
+		},
+		["Source/*"] =	
+		{ 
+			project().name .. "/src/**.c", 
+			project().name .. "/src/**.cpp" 
+		} 
+	}
+	
+	configuration { "Debug" }
+		debugdir "bin"
+		targetname ( project().name .. "_d" )
+		links { DLLName .. "_d" }
+		flags { "Symbols" }
+		defines { "_DEBUG" }
+		
+		configuration { "Native" }
+			libdirs { DXSDK_LIB .. "/x86" }
+			
+		configuration { "x32" }
+			libdirs { DXSDK_LIB .. "/x86" }
+			
+		configuration { "x64" }
+			libdirs { DXSDK_LIB .. "/x64" }
+			
+	configuration { "Release" }
+		debugdir "bin"
+		targetname ( project().name )
 		links { DLLName }
 		flags { "Optimize" }
 		defines { "_RELEASE" }
@@ -80,31 +141,31 @@ project (DLLName)
 	location "build"
 	defines { "_RUPTURE_DLL" }
 
-	files { DLLName .. "/include/**.h", DLLName .. "/include/**.hpp", DLLName .. "/src/**.cpp" }
+	files { project().name .. "/include/**.h", project().name .. "/include/**.hpp", project().name .. "/src/**.cpp" }
 	
-	includedirs( DLLName .. "/include" )
+	includedirs( project().name .. "/include" )
 	includedirs( DXSDK_INCLUDE )
 	
-	implibdir ( DLLName .. "/lib" )
+	implibdir ( project().name .. "/lib" )
 	libdirs { DXSDK_LIB }
 	
 	vpaths	
 	{ 
 		["Headers/*"] =	
 		{ 
-			DLLName .. "/include/**.h", 
-			DLLName .. "/include/**.hpp" 
+			project().name .. "/include/**.h", 
+			project().name .. "/include/**.hpp" 
 		},
 		["Source/*"] =	
 		{ 
-			DLLName .. "/src/**.c", 
-			DLLName .. "/src/**.cpp" 
+			project().name .. "/src/**.c", 
+			project().name .. "/src/**.cpp" 
 		} 
 	}
 	
 	configuration { "Debug" }
 		debugdir "bin"
-		targetname ( DLLName .. "_d" )
+		targetname ( project().name .. "_d" )
 		flags { "Symbols" }
 		defines { "_DEBUG" }
 		links { "d3d11", "d3dx11", "d3dx10" }
@@ -120,7 +181,7 @@ project (DLLName)
 			
 	configuration { "Release" }
 		debugdir "bin"
-		targetname ( DLLName )
+		targetname ( project().name )
 		flags { "Optimize" }
 		defines { "_RELEASE" }
 		links { "d3d11", "d3dx11", "d3dx10" }
