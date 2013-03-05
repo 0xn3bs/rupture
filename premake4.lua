@@ -19,6 +19,7 @@ local DXSDK_LIB = DXSDK .. "/Lib"
 project (BuilderName)
 	uuid "ba88416e-0b2b-438e-8983-5b4524e131ac"
 	kind "WindowedApp"
+	flags { "WinMain" }
 	language "C++"
 	location "build"
 	
