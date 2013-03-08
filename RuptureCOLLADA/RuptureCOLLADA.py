@@ -1,5 +1,5 @@
 from collada import *
-mesh = Collada("IKEA MALM Bedrom Set.dae")
+mesh = Collada("blah/cube.dae")
 
 f1=open('..\\bin\\assets\\models\\model.remf', 'wb')
 

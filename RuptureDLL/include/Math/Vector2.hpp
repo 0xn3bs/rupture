@@ -5,7 +5,7 @@
 #include <ostream>
 #include <cassert>
 
-#include "Export.h"
+#include "Export.hpp"
 
 class REN_DLL_EXPORT Vec2
 {
