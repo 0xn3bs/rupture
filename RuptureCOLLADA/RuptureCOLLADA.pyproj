@@ -25,7 +25,18 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="REMF\Geometry.py" />
+    <Compile Include="REMF\Header.py" />
+    <Compile Include="REMF\Line.py" />
+    <Compile Include="REMF\LineSet.py" />
+    <Compile Include="REMF\Primitive.py" />
+    <Compile Include="REMF\Triangle.py" />
+    <Compile Include="REMF\TriangleSet.py" />
+    <Compile Include="REMF\__init__.py" />
     <Compile Include="RuptureCOLLADA.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="REMF\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

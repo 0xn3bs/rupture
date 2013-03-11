@@ -1,0 +1,26 @@
+Header
+	numAnimations
+	offAnimations
+	numCameras
+	offCameras
+	numControllers
+	offControllers
+	numEffects
+	offEffects
+	numGeometries
+	offGeometries
+	numImages
+	offImages
+	numLights
+	offLights
+	numMaterials
+	offMaterials
+	numNodes
+	offNodes
+	numScenes
+	offScenes
+	
+Header
+	magicNum		//	REMF
+	numGeometries
+	offGeometries
